@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    container_name: my-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: dominik
+      POSTGRES_PASSWORD: secret123
+      POSTGRES_DB: mydb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./short-postgre-db/init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  frontend:
+    build:
+      context: ./short-front
+      args:
+        REACT_APP_BACKEND_URL: http://localhost:8080
+    ports:
+      - "3000:3000"
+      # depends_on:
+      #   - backend
+
+
+volumes:
+  pgdata:

@@ -1,0 +1,107 @@
+.home-background {
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Stack header and content vertically */
+    align-items: center;
+    background: linear-gradient(135deg, #40b886, #56ab2f);
+    font-family: sans-serif;
+    position: relative;
+  }
+  
+  /* Fixed Header Styles */
+  .fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers the title horizontally */
+    z-index: 1000;
+  }
+  
+  /* Logo in the top left */
+  .fixed-header .logo {
+    position: absolute;
+    left: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3b8726;
+  }
+  
+  /* Header title styling */
+  .fixed-header .header-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #3b8726;
+  }
+  
+  /* Push content down to avoid being hidden behind the header */
+  .content {
+    margin-top: 90px; /* Adjust based on header height */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* The white box (form container) */
+  .input-box {
+    width: 40%;
+    min-width: 400px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  /* Layout for rows to align inputs and buttons */
+  .input-row,
+  .output-container {
+    display: flex;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  /* Input fields take up 75% of the row */
+  .url-input,
+  .url-output {
+    padding: 1rem;
+    font-size: 1.1rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    flex: 3; /* 75% space allocation */
+  }
+  
+  /* Buttons take up 25% of the row */
+  .shorten-btn,
+  .copy-btn {
+    flex: 1; /* 25% space allocation */
+    padding: 1rem;
+    font-size: 1.1rem;
+    background-color: #56ab2f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    white-space: nowrap;
+    text-align: center;
+  }
+  
+  .shorten-btn:hover,
+  .copy-btn:hover {
+    background-color: #3b8726;
+  }
+  
+  /* Additional spacing for the output container */
+  .output-container {
+    margin-top: 2rem;
+  }
+  

@@ -28,4 +28,9 @@ public class UrlTranslate {
 
     @Column(name = "created_at")
     LocalDateTime createdAt;
+
+    @PrePersist
+    public void prePersist() {
+        if (createdAt == null) createdAt = LocalDateTime.now();
+    }
 }

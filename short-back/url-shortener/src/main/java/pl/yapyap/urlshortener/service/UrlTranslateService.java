@@ -15,13 +15,14 @@ import java.security.NoSuchAlgorithmException;
 
 @Service
 public class UrlTranslateService {
-    private UrlTranslateRepository urlTranslateRepository;
+    private final UrlTranslateRepository urlTranslateRepository;
 
-    @Value("${max-hashing-tries}")
+    @Value("${short-url-length}")
+    private int shortUrlLen;
+
+    @Value("${max-shortening-tries}")
     private int maxHashingTries;
 
-    @Value("${url-append-const}")
-    private String urlAppendConst;
 
     @Autowired
     public UrlTranslateService(
@@ -32,7 +33,7 @@ public class UrlTranslateService {
 
     public String createUrlMapping(String longUrl) {
         if (!isUrlValid(longUrl)) return "";
-        String shortUrl = generateShortUrl(longUrl);
+        String shortUrl = generateShortUrl();
         if (shortUrl.isEmpty()) return "";
 
         UrlTranslate urlTranslate = new UrlTranslate();
@@ -42,13 +43,12 @@ public class UrlTranslateService {
         return shortUrl;
     }
 
-    private String generateShortUrl(String longUrl){
+    private String generateShortUrl(){
         for (int i = 0; i < maxHashingTries; i++) {
-            String shortUrl = UrlShortener.hashUrlToShort(longUrl);
+            String shortUrl = UrlShortener.generateBase62String(shortUrlLen);
             if (!urlTranslateRepository.existsUrlTranslateByShortUrl(shortUrl)) {
                 return shortUrl;
             }
-            longUrl = longUrl.concat(urlAppendConst);
         }
         return "";
     }

@@ -1,4 +1,4 @@
-const baseUrl = `${REACT_APP_API_URL}`
+const baseUrl = `${process.env.REACT_APP_API_URL}`
 
 const post_plain = async (url, body) => {
     try {
@@ -11,7 +11,7 @@ const post_plain = async (url, body) => {
         })
 
         return response;
-    } catch {
+    } catch (error) {
         // TODO redirect to error page
         console.error('Error:', error);
     }
@@ -27,7 +27,7 @@ const get_plain = async (url) => {
         })
 
         return response;
-    } catch {
+    } catch (error) {
         // TODO redirect to error page
         console.error('Error:', error);
     }

@@ -1,14 +1,24 @@
 import '../styles/Home.css';
 import React, { useState } from 'react';
+import { post_plain, get_plain } from '../utils/ApiHandler';
+
+const shorteningServerDomain = `${process.env.REACT_APP_SREVR_DOMAIN}`
 
 function Home() {
   const [inputUrl, setInputUrl] = useState('');
   const [shortUrl, setShortUrl] = useState('');
 
-  const handleShorten = () => {
-    // Simulate a shortened URL (replace with your API as needed)
-    const fakeShort = 'https://sho.rt/' + Math.random().toString(36).substr(2, 5);
-    setShortUrl(fakeShort);
+  const handleShorten = async () => {
+    const response = await post_plain('/create', inputUrl);
+    if (!response.ok) {
+      return;
+      // TODO inform the user 
+    }
+    const text = await response.text();
+    if (text == null || text === '') {
+      return;
+    }
+    setShortUrl(shorteningServerDomain + text);
   };
 
   const handleCopy = async () => {

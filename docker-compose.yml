@@ -18,7 +18,8 @@ services:
     build:
       context: ./short-front
       args:
-        REACT_APP_BACKEND_URL: http://localhost:8080
+        REACT_APP_API_URL: http://localhost:8080
+        REACT_APP_SREVR_DOMAIN: https://short.yapyap.pl/
     ports:
       - "3000:3000"
     depends_on:

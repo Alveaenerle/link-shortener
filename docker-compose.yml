@@ -5,7 +5,7 @@ services:
     image: postgres
     container_name: my-postgres
     ports:
-      - "5432:5432"
+      - "6003:5432"
     environment:
       POSTGRES_USER: dominik
       POSTGRES_PASSWORD: secret123
@@ -21,7 +21,7 @@ services:
         REACT_APP_API_URL: http://localhost:8080
         REACT_APP_SREVR_DOMAIN: http://localhost:8080/
     ports:
-      - "3000:3000"
+      - "6002:3000"
     depends_on:
       - backend
   
@@ -31,10 +31,18 @@ services:
     environment:
       DB_SOCKET: db:5432
     ports:
-      - "8080:8080"
+      - "6001:8080"
     depends_on:
       - db 
-
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx-proxy
+    ports:
+      - "6000:80"
+    depends_on:
+      - frontend
+      - backend
 
 volumes:
   pgdata:

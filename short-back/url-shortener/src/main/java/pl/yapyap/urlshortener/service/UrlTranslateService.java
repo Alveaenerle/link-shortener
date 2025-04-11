@@ -8,10 +8,6 @@ import pl.yapyap.urlshortener.entity.UrlTranslate;
 import pl.yapyap.urlshortener.repository.UrlTranslateRepository;
 import pl.yapyap.urlshortener.utils.UrlShortener;
 
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 @Service
 public class UrlTranslateService {
@@ -43,6 +39,14 @@ public class UrlTranslateService {
         return shortUrl;
     }
 
+    public String getLongUrl(String shortUrl) {
+        if (shortUrl == null || shortUrl.isBlank()) return "";
+        UrlTranslate urlTranslate = urlTranslateRepository.findUrlTranslateByShortUrl(shortUrl);
+        return urlTranslate != null && urlTranslate.getLongUrl() != null
+                ? urlTranslate.getLongUrl()
+                : "";
+    }
+
     private String generateShortUrl(){
         for (int i = 0; i < maxHashingTries; i++) {
             String shortUrl = UrlShortener.generateBase62String(shortUrlLen);
@@ -53,17 +57,6 @@ public class UrlTranslateService {
         return "";
     }
 
-    public long hashUrlToLong(String url) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hash = md.digest(url.getBytes(StandardCharsets.UTF_8));
-            // Take first 8 bytes = 64 bits = long
-            ByteBuffer buffer = ByteBuffer.wrap(hash);
-            return Math.abs(buffer.getLong());
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 
     private boolean isUrlValid(String url) {

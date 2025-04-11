@@ -1,13 +1,12 @@
 package pl.yapyap.urlshortener.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import pl.yapyap.urlshortener.service.UrlTranslateService;
 
-@RestController
+@CrossOrigin
+@Controller
 public class UrlShortenerController {
 
     private final UrlTranslateService urlTranslateService;
@@ -19,8 +18,13 @@ public class UrlShortenerController {
         this.urlTranslateService = urlTranslateService;
     }
 
-    @PostMapping("/create")
-    public String createShortenUrl(@RequestBody String longUrl) {
-        return urlTranslateService.createUrlMapping(longUrl);
+    @GetMapping("/{shortUrl}")
+    public String redirect(@PathVariable String shortUrl) {
+        StringBuilder sb = new StringBuilder();
+        String longUrl = urlTranslateService.getLongUrl(shortUrl);
+        if (longUrl.isEmpty()) return "";
+        sb.append("redirect:");
+        sb.append(longUrl);
+        return sb.toString();
     }
 }

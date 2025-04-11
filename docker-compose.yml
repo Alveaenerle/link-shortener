@@ -21,8 +21,18 @@ services:
         REACT_APP_BACKEND_URL: http://localhost:8080
     ports:
       - "3000:3000"
-      # depends_on:
-      #   - backend
+    depends_on:
+      - backend
+  
+  backend:
+    build:
+      context: ./short-back
+    environment:
+      DB_SOCKET: db:5432
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db 
 
 
 volumes:

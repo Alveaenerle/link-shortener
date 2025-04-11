@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 import pl.yapyap.urlshortener.entity.UrlTranslate;
 
 @Repository
-public interface UrlTranslateRepository extends JpaRepository<Integer, UrlTranslate> {
+public interface UrlTranslateRepository extends JpaRepository<UrlTranslate, Integer> {
+    boolean existsUrlTranslateByShortUrl(String shortUrl);
 }

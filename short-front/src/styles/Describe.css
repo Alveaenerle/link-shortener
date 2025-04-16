@@ -1,0 +1,10 @@
+.output-container-desc {
+    display: flex;
+    align-items: stretch;
+    gap: 1rem;
+    margin-top: -1rem;
+}
+
+.box-desc-text {
+    text-align: center;
+}

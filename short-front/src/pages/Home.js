@@ -1,10 +1,12 @@
 import '../styles/Home.css';
 import React, { useState } from 'react';
 import { post_plain, get_plain } from '../utils/ApiHandler';
+import Header from '../components/Header';
+import { getServerUrl } from '../utils/EnvInfo';
 
-const shorteningServerDomain = `${process.env.REACT_APP_SREVR_DOMAIN}`
 
 function Home() {
+  const shorteningServerDomain = getServerUrl();
   const [inputUrl, setInputUrl] = useState('');
   const [shortUrl, setShortUrl] = useState('');
 
@@ -30,11 +32,7 @@ function Home() {
 
   return (
     <div className="home-background">
-      <header className="fixed-header">
-        <div className="logo">YapYap</div>
-        <div className="header-title">URL Shortener</div>
-      </header>
-      
+      <Header/>
       {/* The main content is pushed down to avoid overlapping the fixed header */}
       <div className="content">
         <div className="input-box">

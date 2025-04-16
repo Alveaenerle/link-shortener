@@ -8,21 +8,7 @@
     position: relative;
   }
   
-  /* Fixed Header Styles */
-  .fixed-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centers the title horizontally */
-    z-index: 1000;
-  }
-  
+
   /* Logo in the top left */
   .fixed-header .logo {
     position: absolute;

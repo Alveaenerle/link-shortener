@@ -1,4 +1,5 @@
-const baseUrl = `${process.env.REACT_APP_API_URL}`
+import { getBaseUrl } from "./EnvInfo";
+const baseUrl = getBaseUrl();
 
 const post_plain = async (url, body) => {
     try {
@@ -33,4 +34,8 @@ const get_plain = async (url) => {
     }
 }
 
-export {post_plain, get_plain};
+const get_base_url = () => {
+    return baseUrl;
+}
+
+export { post_plain, get_plain, get_base_url };

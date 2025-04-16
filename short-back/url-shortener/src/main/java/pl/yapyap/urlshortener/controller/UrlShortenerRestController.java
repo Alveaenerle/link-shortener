@@ -16,10 +16,14 @@ public class UrlShortenerRestController {
         this.urlTranslateService = urlTranslateService;
     }
 
-
     @PostMapping("/create")
     public String createShortenUrl(@RequestBody String longUrl) {
         return urlTranslateService.createUrlMapping(longUrl);
+    }
+
+    @GetMapping("/long/{shortUrl}")
+    public String getLongUrl(@PathVariable String shortUrl) {
+        return urlTranslateService.getLongUrl(shortUrl);
     }
 
 }

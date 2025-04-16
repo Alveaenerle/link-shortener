@@ -4,8 +4,6 @@ services:
   db:
     image: postgres
     container_name: my-postgres
-    ports:
-      - "6003:5432"
     environment:
       POSTGRES_USER: dominik
       POSTGRES_PASSWORD: secret123
@@ -18,10 +16,8 @@ services:
     build:
       context: ./short-front
       args:
-        REACT_APP_API_URL: http://localhost:8080
-        REACT_APP_SREVR_DOMAIN: http://localhost:8080/
-    ports:
-      - "6002:3000"
+        REACT_APP_API_URL: https://yapyap.pl
+        REACT_APP_SREVR_DOMAIN: https://yapyap.pl/
     depends_on:
       - backend
   
@@ -30,8 +26,6 @@ services:
       context: ./short-back
     environment:
       DB_SOCKET: db:5432
-    ports:
-      - "6001:8080"
     depends_on:
       - db 
   nginx:
